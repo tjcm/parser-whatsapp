@@ -22,30 +22,30 @@ def startsWithAuthor(s):
 
 
 def getDataPoint(line):
-    # line = 19/10/18 23:58 - ‪+55 11 98207-0044‬: bolsonaro tem muito trabalho
+    # line = 19/10/18 23:58 - ‪+55 81 99999-0000‬: Essa é a mensagem enviada pelo usuário
     
-    splitLine = line.split(' - ') # splitLine = ['19/10/18 23:58', '+55 11 98207-0044‬: bolsonaro tem muito trabalho']
+    splitLine = line.split(' - ') # splitLine = ['19/10/18 23:58', '+55 81 99999-0000‬: Essa é a mensagem enviada pelo usuário']
     
     dateTime = splitLine[0] # dateTime = '19/10/18 23:58'
     
     date, time = dateTime.split(' ') # date = '19/10/18'; time = '23:58'
     
-    message = ' '.join(splitLine[1:]) # message = '+55 11 98207-0044‬: bolsonaro tem muito trabalho'
+    message = ' '.join(splitLine[1:]) # message = '+55 81 99999-0000‬: Essa é a mensagem enviada pelo usuário'
     
     if startsWithAuthor(message): # True
-        splitMessage = message.split(': ') # splitMessage = ['+55 11 98207-0044‬', 'bolsonaro tem muito trabalho']
-        author = splitMessage[0] # author = '+55 11 98207-0044‬'
-        message = ' '.join(splitMessage[1:]) # message = 'bolsonaro tem muito trabalho'
+        splitMessage = message.split(': ') # splitMessage = ['+55 81 99999-0000‬', 'Essa é a mensagem enviada pelo usuário']
+        author = splitMessage[0] # author = '+55 81 99999-0000‬'
+        message = ' '.join(splitMessage[1:]) # message = 'Essa é a mensagem enviada pelo usuário'
     else:
         author = None
     return date, time, author, message
 
 
-parsedData = [] # List to keep track of data so it can be used by a Pandas dataframe
-conversationPath = 'b17.txt' 
+parsedData = [] # Lista dos dados que vai ser usada pelo pandas
+conversationPath = 'arquivo.txt' 
 
 with open(conversationPath, encoding="utf-8") as fp:
-    fp.readline() # Skipping first line of the file (usually contains information about end-to-end encryption)
+    fp.readline() # Pula a primeira linha que fala sobre a ecriptação ponta a ponta do whatsapp
         
     messageBuffer = [] # Buffer to capture intermediate output for multi-line messages
     date, time, author = None, None, None # Intermediate variables to keep track of the current message being processed
